@@ -1,4 +1,4 @@
-const _baseUrl = "https://api.getflow.com/v2";
+const _baseUrl = 'https://api.getflow.com/v2'
 
 const listAccounts = (z, bundle) => {
   return z
@@ -7,24 +7,24 @@ const listAccounts = (z, bundle) => {
       params: {
         organization_id: bundle.authData.orgId,
         workspace_id: bundle.inputData.workspace,
-        include: "accounts"
-      }
+        include: 'accounts',
+      },
     })
     .then(response => JSON.parse(response.content))
-    .then(json => json.accounts);
-};
+    .then(json => json.accounts)
+}
 
 module.exports = {
-  key: "account",
-  noun: "Account",
+  key: 'account',
+  noun: 'Account',
 
   list: {
     display: {
-      label: "New Account",
-      description: "Trigger when a new account is added"
+      label: 'New Account',
+      description: 'Trigger when a new account is added',
     },
     operation: {
-      perform: listAccounts
-    }
-  }
-};
+      perform: listAccounts,
+    },
+  },
+}

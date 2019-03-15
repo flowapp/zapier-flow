@@ -23,34 +23,28 @@ const App = {
 
   authentication: auth,
 
-  beforeRequest: [
-    includeApiKeyHeader
-  ],
+  beforeRequest: [includeApiKeyHeader],
 
-  afterResponse: [
-  ],
+  afterResponse: [],
 
   // If you want your resource to show up, you better include it here!
   resources: {
     [Task.key]: Task,
     [Project.key]: Project,
     [Workspace.key]: Workspace,
-    [Account.key]: Account
+    [Account.key]: Account,
   },
 
   // If you want your trigger to show up, you better include it here!
   triggers: {
-    [Section.key]: Section
+    [Section.key]: Section,
   },
 
   // If you want your searches to show up, you better include it here!
-  searches: {
-  },
+  searches: {},
 
   // If you want your creates to show up, you better include it here!
-  creates: {
-
-  }
+  creates: {},
 }
 
 // Finally, export the app.

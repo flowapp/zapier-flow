@@ -1,9 +1,0 @@
-{
-  "extends": [
-    "plugin:@zapier/zapier/base",
-    "plugin:@zapier/zapier/prettier"
-  ],
-  "plugins": [
-    "@zapier/zapier"
-  ],
-}

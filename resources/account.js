@@ -6,7 +6,7 @@ const listAccounts = (z, bundle) => {
       url: `${_baseUrl}/memberships`,
       params: {
         organization_id: bundle.authData.orgId,
-        workspace_id: bundle.inputData.workspace,
+        ...(bundle.inputData.workspace && { workspace_id: bundle.inputData.workspace }),
         include: 'accounts',
       },
     })

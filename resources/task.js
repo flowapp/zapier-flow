@@ -48,7 +48,7 @@ const listTasks = (z, bundle) => {
       url: `${_baseUrl}/tasks`,
       params: {
         organization_id: bundle.authData.orgId,
-        workspace_id: bundle.inputData.workspace,
+        ...(bundle.inputData.workspace && { workspace_id: bundle.inputData.workspace }),
       },
     })
     .then(response => JSON.parse(response.content))

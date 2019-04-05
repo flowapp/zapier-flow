@@ -1,9 +1,9 @@
-const _baseUrl = 'https://api.getflow.com/v2';
+const { FLOW_API_URL } = require('../utils/constants');
 
 const listAccounts = (z, bundle) => {
   return z
     .request({
-      url: `${_baseUrl}/memberships`,
+      url: `${FLOW_API_URL}/memberships`,
       params: {
         organization_id: bundle.authData.orgId,
         ...(bundle.inputData.workspace && { workspace_id: bundle.inputData.workspace }),

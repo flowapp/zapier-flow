@@ -1,4 +1,4 @@
-const _baseUrl = 'https://api.getflow.com/v2'
+const _baseUrl = 'https://api.getflow.com/v2';
 
 const listAccounts = (z, bundle) => {
   return z
@@ -10,9 +10,9 @@ const listAccounts = (z, bundle) => {
         include: 'accounts',
       },
     })
-    .then(response => JSON.parse(response.content))
-    .then(json => json.accounts)
-}
+    .then((response) => JSON.parse(response.content))
+    .then((json) => json.accounts);
+};
 
 module.exports = {
   key: 'account',
@@ -27,4 +27,4 @@ module.exports = {
       perform: listAccounts,
     },
   },
-}
+};

@@ -1,4 +1,4 @@
-const _baseUrl = 'https://api.getflow.com/v2'
+const _baseUrl = 'https://api.getflow.com/v2';
 
 const getSections = (z, bundle) => {
   return z
@@ -10,9 +10,9 @@ const getSections = (z, bundle) => {
         include: 'sections',
       },
     })
-    .then(response => JSON.parse(response.content))
-    .then(json => json.sections)
-}
+    .then((response) => JSON.parse(response.content))
+    .then((json) => json.sections);
+};
 
 module.exports = {
   key: 'section',
@@ -27,4 +27,4 @@ module.exports = {
   operation: {
     perform: getSections,
   },
-}
+};

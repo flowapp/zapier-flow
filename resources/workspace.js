@@ -1,4 +1,4 @@
-const _baseUrl = 'https://api.getflow.com/v2'
+const _baseUrl = 'https://api.getflow.com/v2';
 
 const listWorkspaces = (z, bundle) => {
   return z
@@ -8,9 +8,9 @@ const listWorkspaces = (z, bundle) => {
         organization_id: bundle.authData.orgId,
       },
     })
-    .then(response => JSON.parse(response.content))
-    .then(json => json.workspaces)
-}
+    .then((response) => JSON.parse(response.content))
+    .then((json) => json.workspaces);
+};
 
 const getWorkspace = (z, bundle) => {
   return z
@@ -20,9 +20,9 @@ const getWorkspace = (z, bundle) => {
         organization_id: bundle.authData.orgId,
       },
     })
-    .then(response => JSON.parse(response.content))
-    .then(json => json.workspace)
-}
+    .then((response) => JSON.parse(response.content))
+    .then((json) => json.workspace);
+};
 
 module.exports = {
   key: 'workspace',
@@ -48,4 +48,4 @@ module.exports = {
       perform: getWorkspace,
     },
   },
-}
+};

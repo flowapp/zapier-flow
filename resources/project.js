@@ -1,4 +1,4 @@
-const _baseUrl = 'https://api.getflow.com/v2'
+const _baseUrl = 'https://api.getflow.com/v2';
 
 const listProjects = (z, bundle) => {
   return z
@@ -10,9 +10,9 @@ const listProjects = (z, bundle) => {
         include: 'sections',
       },
     })
-    .then(response => JSON.parse(response.content))
-    .then(json => json.lists)
-}
+    .then((response) => JSON.parse(response.content))
+    .then((json) => json.lists);
+};
 
 const getProject = (z, bundle) => {
   return z
@@ -23,9 +23,9 @@ const getProject = (z, bundle) => {
         workspace_id: bundle.inputData.workspace,
       },
     })
-    .then(response => JSON.parse(response.content))
-    .then(json => json.list)
-}
+    .then((response) => JSON.parse(response.content))
+    .then((json) => json.list);
+};
 
 module.exports = {
   key: 'project',
@@ -51,4 +51,4 @@ module.exports = {
       perform: getProject,
     },
   },
-}
+};

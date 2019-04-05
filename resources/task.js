@@ -1,4 +1,4 @@
-const _baseUrl = 'https://api.getflow.com/v2'
+const _baseUrl = 'https://api.getflow.com/v2';
 
 const getTask = (z, bundle) => {
   return z
@@ -8,9 +8,9 @@ const getTask = (z, bundle) => {
         organization_id: bundle.authData.orgId,
       },
     })
-    .then(response => JSON.parse(response.content))
-    .then(json => json.task)
-}
+    .then((response) => JSON.parse(response.content))
+    .then((json) => json.task);
+};
 
 const createTask = (z, bundle) => {
   const request = {
@@ -34,13 +34,13 @@ const createTask = (z, bundle) => {
     headers: {
       'content-type': 'application/json',
     },
-  }
+  };
 
   return z
     .request(request)
-    .then(response => JSON.parse(response.content))
-    .then(json => json.task)
-}
+    .then((response) => JSON.parse(response.content))
+    .then((json) => json.task);
+};
 
 const listTasks = (z, bundle) => {
   return z
@@ -51,9 +51,9 @@ const listTasks = (z, bundle) => {
         ...(bundle.inputData.workspace && { workspace_id: bundle.inputData.workspace }),
       },
     })
-    .then(response => JSON.parse(response.content))
-    .then(json => json.tasks)
-}
+    .then((response) => JSON.parse(response.content))
+    .then((json) => json.tasks);
+};
 
 module.exports = {
   key: 'task',
@@ -159,4 +159,4 @@ module.exports = {
       perform: createTask,
     },
   },
-}
+};

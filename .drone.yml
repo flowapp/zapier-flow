@@ -1,0 +1,17 @@
+kind: pipeline
+name: default
+
+steps:
+- name: setup
+  image: node
+  commands:
+  - npm install
+- name: lint
+  image: node
+  commands:
+  - npm run lint:js
+
+trigger:
+  event:
+  - push
+  - pull_request

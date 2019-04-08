@@ -37,6 +37,15 @@ module.exports = {
       description: 'Trigger when a new project is added.',
     },
     operation: {
+      inputFields: [
+        {
+          key: 'workspace',
+          type: 'string',
+          helpText: 'Team for Project',
+          dynamic: 'workspace.id.name',
+          altersDynamicFields: true,
+        },
+      ],
       perform: listProjects,
     },
   },

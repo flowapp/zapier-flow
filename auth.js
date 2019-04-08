@@ -1,6 +1,8 @@
+const { FLOW_API_URL } = require('./utils/constants');
+
 const testAuth = (z) => {
   const promise = z.request({
-    url: 'https://api.getflow.com/v2/tasks',
+    url: `${FLOW_API_URL}/tasks`,
   });
 
   return promise.then((response) => {

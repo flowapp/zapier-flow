@@ -10,6 +10,10 @@ steps:
   image: node
   commands:
   - npm run lint:js
+- name: test
+  image: node
+  commands:
+  - npm run test
 
 trigger:
   event:

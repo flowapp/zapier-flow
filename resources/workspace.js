@@ -1,28 +1,28 @@
-const _baseUrl = 'https://api.getflow.com/v2'
+const { FLOW_API_URL } = require('../utils/constants');
 
 const listWorkspaces = (z, bundle) => {
   return z
     .request({
-      url: `${_baseUrl}/workspaces`,
+      url: `${FLOW_API_URL}/workspaces`,
       params: {
         organization_id: bundle.authData.orgId,
       },
     })
-    .then(response => JSON.parse(response.content))
-    .then(json => json.workspaces)
-}
+    .then((response) => JSON.parse(response.content))
+    .then((json) => json.workspaces);
+};
 
 const getWorkspace = (z, bundle) => {
   return z
     .request({
-      url: `${_baseUrl}/workspaces/${bundle.inputData.id}`,
+      url: `${FLOW_API_URL}/workspaces/${bundle.inputData.id}`,
       params: {
         organization_id: bundle.authData.orgId,
       },
     })
-    .then(response => JSON.parse(response.content))
-    .then(json => json.workspace)
-}
+    .then((response) => JSON.parse(response.content))
+    .then((json) => json.workspace);
+};
 
 module.exports = {
   key: 'workspace',
@@ -48,4 +48,4 @@ module.exports = {
       perform: getWorkspace,
     },
   },
-}
+};

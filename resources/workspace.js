@@ -26,12 +26,12 @@ const getWorkspace = (z, bundle) => {
 
 module.exports = {
   key: 'workspace',
-  noun: 'Workspace',
+  noun: 'Team',
 
   list: {
     display: {
-      label: 'New Workspace',
-      description: 'Triggers when a new workspace is added.',
+      label: 'New Team',
+      description: 'Triggers when a new team is added.',
     },
     operation: {
       perform: listWorkspaces,
@@ -40,8 +40,8 @@ module.exports = {
 
   get: {
     display: {
-      label: 'Get Workspace',
-      description: 'Gets a workspace',
+      label: 'Get Team',
+      description: 'Gets a single team from Flow',
     },
     operation: {
       inputFields: [{ key: 'id', required: true }],

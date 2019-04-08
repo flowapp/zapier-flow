@@ -1,12 +1,14 @@
 module.exports = {
   env: {
     es6: true,
+    "jest/globals": true,
   },
   parserOptions: {
     ecmaVersion: 7,
   },
   plugins: [
-    '@zapier/zapier'
+    '@zapier/zapier',
+    'jest',
   ],
   extends: [
     'plugin:@zapier/zapier/base'

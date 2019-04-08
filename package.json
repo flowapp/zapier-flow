@@ -16,8 +16,11 @@
   "devDependencies": {
     "@zapier/eslint-plugin-zapier": "^9.0.0",
     "eslint": "^5.15.1",
+    "eslint-plugin-jest": "^22.4.1",
     "husky": "^1.3.1",
-    "lint-staged": "^8.1.5"
+    "jest": "^24.7.1",
+    "lint-staged": "^8.1.5",
+    "nock": "^10.0.6"
   },
   "husky": {
     "hooks": {
@@ -25,7 +28,8 @@
     }
   },
   "scripts": {
-    "lint:js": "$(npm bin)/eslint *.js triggers resources --cache"
+    "lint:js": "$(npm bin)/eslint *.js triggers resources --cache",
+    "test": "$(npm bin)/jest"
   },
   "lint-staged": {
     "*.js": "npm run lint:js"

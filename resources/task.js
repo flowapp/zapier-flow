@@ -1,5 +1,93 @@
 const { FLOW_API_URL } = require('../utils/constants');
 
+const TaskOutputFields = [
+  {
+    key: 'id',
+    label: 'Task ID',
+  },
+  {
+    key: 'name',
+    label: 'Task Name',
+  },
+
+  {
+    key: 'workspace_id',
+    label: 'Team ID',
+  },
+
+  {
+    key: 'list_id',
+    label: 'Project ID',
+  },
+
+  {
+    key: 'section_id',
+    label: 'Section ID',
+  },
+
+  {
+    key: 'account_id',
+    label: 'Task Creater ID',
+  },
+
+  {
+    key: 'owner_id',
+    label: 'Task Assignee ID',
+  },
+
+  {
+    key: 'due_on',
+    label: 'Task Due Date',
+  },
+
+  {
+    key: 'starts_on',
+    label: 'Task Start Date',
+  },
+
+  {
+    key: 'created_at',
+    label: 'Task Created At',
+  },
+
+  {
+    key: 'updated_at',
+    label: 'Task Last Updated At',
+  },
+
+  {
+    key: 'tags',
+    label: 'Task Tags',
+  },
+];
+
+/*
+  * Method to convert API task response to trim down unneeded values
+  * When Zapier populates the action part of the form it grabs all items from the task response
+  * without any discrimination. Many of the items are poorly labelled and not likely to be needed for any integration.
+  *
+  * In order to help clean up the noise, this method cherry-picks the values that seem important to expose to Zapier.
+  *
+  * @param {Object} Task
+  * @return {Object} Task
+*/
+function parseTask(task) {
+  return {
+    id: task.id,
+    name: task.name,
+    workspace_id: task.workspace_id,
+    list_id: task.list_id,
+    section_id: task.section_id,
+    account_id: task.account_id,
+    owner_id: task.owner_id,
+    due_on: task.due_on,
+    starts_on: task.starts_on,
+    created_at: task.created_at,
+    updated_at: task.updated_at,
+    tags: task.tags,
+  };
+}
+
 const getTask = (z, bundle) => {
   return z
     .request({
@@ -9,7 +97,9 @@ const getTask = (z, bundle) => {
       },
     })
     .then((response) => z.JSON.parse(response.content))
-    .then((json) => json.task);
+    .then((json) => {
+      return parseTask(json.task);
+    });
 };
 
 const createTask = (z, bundle) => {
@@ -52,7 +142,7 @@ const listTasks = (z, bundle) => {
       },
     })
     .then((response) => z.JSON.parse(response.content))
-    .then((json) => json.tasks);
+    .then((json) => json.tasks.map(parseTask));
 };
 
 module.exports = {
@@ -67,6 +157,7 @@ module.exports = {
 
     operation: {
       inputFields: [{ key: 'id', required: true }],
+      outputFields: TaskOutputFields,
       perform: getTask,
     },
   },
@@ -88,6 +179,7 @@ module.exports = {
           altersDynamicFields: true,
         },
       ],
+      outputFields: TaskOutputFields,
       perform: listTasks,
     },
   },

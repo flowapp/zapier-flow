@@ -34,7 +34,7 @@ module.exports = {
   list: {
     display: {
       label: 'New Project',
-      description: 'Trigger when a new project is added.',
+      description: 'Triggers when a new project is added.',
     },
     operation: {
       perform: listProjects,

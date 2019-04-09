@@ -21,7 +21,7 @@ module.exports = {
   list: {
     display: {
       label: 'New Account',
-      description: 'Trigger when a new account is added',
+      description: 'Triggers when a new account is added.',
     },
     operation: {
       perform: listAccounts,

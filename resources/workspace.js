@@ -31,7 +31,7 @@ module.exports = {
   list: {
     display: {
       label: 'New Workspace',
-      description: 'Trigger when a new workspace is added',
+      description: 'Triggers when a new workspace is added.',
     },
     operation: {
       perform: listWorkspaces,

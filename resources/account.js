@@ -10,7 +10,7 @@ const listAccounts = (z, bundle) => {
         include: 'accounts',
       },
     })
-    .then((response) => JSON.parse(response.content))
+    .then((response) => z.JSON.parse(response.content))
     .then((json) => json.accounts);
 };
 

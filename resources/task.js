@@ -8,7 +8,7 @@ const getTask = (z, bundle) => {
         organization_id: bundle.authData.orgId,
       },
     })
-    .then((response) => JSON.parse(response.content))
+    .then((response) => z.JSON.parse(response.content))
     .then((json) => json.task);
 };
 
@@ -38,7 +38,7 @@ const createTask = (z, bundle) => {
 
   return z
     .request(request)
-    .then((response) => JSON.parse(response.content))
+    .then((response) => z.JSON.parse(response.content))
     .then((json) => json.task);
 };
 
@@ -51,7 +51,7 @@ const listTasks = (z, bundle) => {
         ...(bundle.inputData.workspace && { workspace_id: bundle.inputData.workspace }),
       },
     })
-    .then((response) => JSON.parse(response.content))
+    .then((response) => z.JSON.parse(response.content))
     .then((json) => json.tasks);
 };
 

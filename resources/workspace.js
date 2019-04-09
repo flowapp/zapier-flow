@@ -8,7 +8,7 @@ const listWorkspaces = (z, bundle) => {
         organization_id: bundle.authData.orgId,
       },
     })
-    .then((response) => JSON.parse(response.content))
+    .then((response) => z.JSON.parse(response.content))
     .then((json) => json.workspaces);
 };
 
@@ -20,7 +20,7 @@ const getWorkspace = (z, bundle) => {
         organization_id: bundle.authData.orgId,
       },
     })
-    .then((response) => JSON.parse(response.content))
+    .then((response) => z.JSON.parse(response.content))
     .then((json) => json.workspace);
 };
 

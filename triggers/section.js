@@ -10,7 +10,7 @@ const getSections = (z, bundle) => {
         include: 'sections',
       },
     })
-    .then((response) => JSON.parse(response.content))
+    .then((response) => z.JSON.parse(response.content))
     .then((json) => json.sections);
 };
 

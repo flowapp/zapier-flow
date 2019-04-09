@@ -10,7 +10,7 @@ const listProjects = (z, bundle) => {
         include: 'sections',
       },
     })
-    .then((response) => JSON.parse(response.content))
+    .then((response) => z.JSON.parse(response.content))
     .then((json) => json.lists);
 };
 
@@ -23,7 +23,7 @@ const getProject = (z, bundle) => {
         workspace_id: bundle.inputData.workspace,
       },
     })
-    .then((response) => JSON.parse(response.content))
+    .then((response) => z.JSON.parse(response.content))
     .then((json) => json.list);
 };
 

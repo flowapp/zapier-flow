@@ -3,7 +3,7 @@
   "version": "0.3.0",
   "description": "An app to connect the Flow API to Zapier.",
   "repository": "flowapp/zapier-flow",
-  "author": "Flow Technology Ltd",
+  "author": "Flow Technologies Ltd",
   "contributors": [
     "Josiah Wiebe <hi@jwie.be>",
     "Rose Robertson <rose@getflow.com>"

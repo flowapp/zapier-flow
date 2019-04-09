@@ -1,6 +1,6 @@
 const { FLOW_API_URL } = require('../utils/constants');
 
-const listAccounts = (z, bundle) => {
+const getAccounts = (z, bundle) => {
   return z
     .request({
       url: `${FLOW_API_URL}/memberships`,
@@ -18,13 +18,12 @@ module.exports = {
   key: 'account',
   noun: 'Account',
 
-  list: {
-    display: {
-      label: 'New Account',
-      description: 'Triggers when a new account is added.',
-    },
-    operation: {
-      perform: listAccounts,
-    },
+  display: {
+    label: 'List of Accounts',
+    description: 'This hidden trigger gets a list of accounts in a Team.',
+    hidden: true,
+  },
+  operation: {
+    perform: getAccounts,
   },
 };

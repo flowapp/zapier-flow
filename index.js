@@ -11,7 +11,7 @@ const includeApiKeyHeader = (request, z, bundle) => {
 const Task = require('./resources/task');
 const Project = require('./resources/project');
 const Workspace = require('./resources/workspace');
-const Account = require('./resources/account');
+const Account = require('./triggers/account');
 const Section = require('./triggers/section');
 
 // Now we can roll up all our behavios in an App.
@@ -32,12 +32,12 @@ const App = {
     [Task.key]: Task,
     [Project.key]: Project,
     [Workspace.key]: Workspace,
-    [Account.key]: Account,
   },
 
   // If you want your trigger to show up, you better include it here!
   triggers: {
     [Section.key]: Section,
+    [Account.key]: Account,
   },
 
   // If you want your searches to show up, you better include it here!

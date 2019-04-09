@@ -6,6 +6,7 @@ steps:
   image: node
   commands:
   - npm install
+  - npm install zapier-platform-cli
 - name: lint
   image: node
   commands:
@@ -14,6 +15,10 @@ steps:
   image: node
   commands:
   - npm run test
+- name: validate
+  image: node
+  commands:
+  - $(npm bin)/zapier validate
 
 trigger:
   event:

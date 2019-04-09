@@ -73,7 +73,7 @@ module.exports = {
 
   list: {
     display: {
-      label: 'New Tasks',
+      label: 'New Task',
       description: 'Trigger when a new task is added.',
       important: true,
     },

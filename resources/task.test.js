@@ -23,6 +23,7 @@ describe('Task', function () {
     nock('https://api.getflow.com')
       .get('/v2/tasks')
       .query({
+        order: 'created_at',
         organization_id: 1,
       })
       .reply(200, {

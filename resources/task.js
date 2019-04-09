@@ -47,6 +47,7 @@ const listTasks = (z, bundle) => {
     .request({
       url: `${FLOW_API_URL}/tasks`,
       params: {
+        order: 'created_at',
         organization_id: bundle.authData.orgId,
         ...(bundle.inputData.workspace && { workspace_id: bundle.inputData.workspace }),
       },

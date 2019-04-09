@@ -102,10 +102,27 @@ module.exports = {
     operation: {
       inputFields: [
         {
+          key: 'title',
+          type: 'string',
+          label: 'Task Name',
+          helpText: 'Enter a descriptive title for your task.',
+          required: true,
+        },
+        {
+          key: 'note',
+          type: 'text',
+          label: 'Task Note',
+          helpText:
+            'Task notes are for when you need to include longer, more detailed information. You can use [Github Flavored Markdown](https://help.github.com/articles/basic-writing-and-formatting-syntax/) for formatting.',
+          required: false,
+        },
+        {
           key: 'workspace',
           type: 'integer',
           label: 'Team',
           dynamic: 'workspace.id.name',
+          helpText:
+            'Choose a team for your task to be created in.',
           altersDynamicFields: true,
           required: true,
         },
@@ -114,15 +131,17 @@ module.exports = {
           type: 'integer',
           label: 'Project',
           dynamic: 'project.id.name',
+          helpText:
+            'Choose a project for your task to be created in. Projects are grouped under Teams, so if you can’t find the project you want, ensure the correct team is selected.',
           altersDynamicFields: true,
           required: true,
         },
         {
           key: 'section',
           type: 'integer',
-          label: 'Task Section',
+          label: 'Section',
           helpText:
-            'If the project has todo sections, you can select one here. By default, the task will get added to the "No Section" list if you don\'t specify a section.',
+            'If your selected project has sections, you can select one here. If no section is selected, the task will be filed in the project’s default section if one exists, and no section if the project does not have a default section.',
           dynamic: 'section.id.name',
           altersDynamicFields: true,
           required: false,
@@ -132,28 +151,17 @@ module.exports = {
           type: 'integer',
           label: 'Assignee',
           dynamic: 'account.id.name',
-          altersDynamicFields: true,
-          required: false,
-        },
-        {
-          key: 'title',
-          type: 'string',
-          label: 'Task Name',
-          helpText: 'Enter a descriptive title for the task.',
-          required: true,
-        },
-        {
-          key: 'note',
-          type: 'text',
-          label: 'Task Note',
           helpText:
-            'You can enter a note for the task. You can use [Github Flavored Markdown](https://help.github.com/articles/basic-writing-and-formatting-syntax/) for formatting.',
+            'Choose a user to assign your task to.',
+          altersDynamicFields: true,
           required: false,
         },
         {
           key: 'dueDate',
           type: 'datetime',
           label: 'Due Date',
+          helpText:
+            'Choose a due date for your task',
           required: false,
         },
       ],

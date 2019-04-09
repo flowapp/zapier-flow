@@ -83,7 +83,7 @@ module.exports = {
         {
           key: 'workspace',
           type: 'string',
-          helpText: 'Workspace for Task',
+          helpText: 'Team for Task',
           dynamic: 'workspace.id.name',
           altersDynamicFields: true,
         },
@@ -103,7 +103,7 @@ module.exports = {
         {
           key: 'workspace',
           type: 'integer',
-          label: 'Workspace',
+          label: 'Team',
           dynamic: 'workspace.id.name',
           altersDynamicFields: true,
           required: true,

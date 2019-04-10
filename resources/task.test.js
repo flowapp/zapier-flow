@@ -2,13 +2,14 @@ const zapier = require('zapier-platform-core');
 const App = require('../index');
 const appTester = zapier.createAppTester(App);
 const nock = require('nock');
+const { FLOW_API_URL } = require('../utils/constants');
 
 describe('Task', function () {
   let bundle;
   beforeEach(function () {
     // Mock request for getting a single task
-    nock('https://api.getflow.com')
-      .get('/v2/tasks/87')
+    nock(FLOW_API_URL)
+      .get('/tasks/87')
       .query({
         organization_id: 1,
       })
@@ -20,8 +21,8 @@ describe('Task', function () {
       });
 
     // Mock request for getting a list of tasks
-    nock('https://api.getflow.com')
-      .get('/v2/tasks')
+    nock(FLOW_API_URL)
+      .get('/tasks')
       .query({
         order: 'created_at',
         organization_id: 1,
@@ -42,8 +43,8 @@ describe('Task', function () {
       });
 
     // Mock request for creating a task
-    nock('https://api.getflow.com')
-      .post('/v2/tasks', {
+    nock(FLOW_API_URL)
+      .post('/tasks', {
         task: {
           workspace_id: 8,
           name: 'Creating a new task',

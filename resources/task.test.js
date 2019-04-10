@@ -23,10 +23,7 @@ describe('Task', function () {
     // Mock request for getting a list of tasks
     nock(FLOW_API_URL)
       .get('/tasks')
-      .query({
-        order: 'created_at',
-        organization_id: 1,
-      })
+      .query(true)
       .reply(200, {
         tasks: [{
           id: 37,

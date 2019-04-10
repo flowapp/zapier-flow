@@ -14,6 +14,7 @@ module.exports = {
     'plugin:@zapier/zapier/base'
   ],
   rules: {
+    'prefer-const': 'off', // We don’t like this rule works w/r/t object mutation
     'indent': [ 'warn', 2 ],
     'linebreak-style': [ 'error', 'unix' ],
     'quotes': [ 'error', 'single' ],

@@ -2,13 +2,14 @@ const zapier = require('zapier-platform-core');
 const App = require('../index');
 const appTester = zapier.createAppTester(App);
 const nock = require('nock');
+const { FLOW_API_URL } = require('../utils/constants');
 
 describe('Workspace', function () {
   let bundle;
   beforeEach(function () {
     // Mock request for getting a single workspace
-    nock('https://api.getflow.com')
-      .get('/v2/workspaces/99')
+    nock(FLOW_API_URL)
+      .get('/workspaces/99')
       .query({
         organization_id: 1,
       })
@@ -20,8 +21,8 @@ describe('Workspace', function () {
       });
 
     // Mock request for getting a list of workspaces
-    nock('https://api.getflow.com')
-      .get('/v2/workspaces')
+    nock(FLOW_API_URL)
+      .get('/workspaces')
       .query({
         organization_id: 1,
       })

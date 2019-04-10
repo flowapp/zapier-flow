@@ -2,13 +2,14 @@ const zapier = require('zapier-platform-core');
 const App = require('../index');
 const appTester = zapier.createAppTester(App);
 const nock = require('nock');
+const { FLOW_API_URL } = require('../utils/constants');
 
 describe('Account', function () {
   let bundle;
   beforeEach(function () {
     // Mock request for getting a list of accounts
-    nock('https://api.getflow.com')
-      .get('/v2/memberships')
+    nock(FLOW_API_URL)
+      .get('/memberships')
       .query({
         organization_id: 1,
         workspace_id: 8,

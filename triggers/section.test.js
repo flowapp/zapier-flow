@@ -19,6 +19,7 @@ describe('Section', function () {
         list: {
           id: 100,
           name: 'I am a list',
+          completed_section_id: 95,
         },
         sections: [{
           id: 7,
@@ -27,6 +28,10 @@ describe('Section', function () {
         {
           id: 22,
           name: 'I am another section',
+        },
+        {
+          id: 95,
+          name: 'I am the done section',
         },
         {
           id: 45,
@@ -53,6 +58,15 @@ describe('Section', function () {
         expect(results[0].id).toEqual(7);
         expect(results[1].id).toEqual(22);
         expect(results[2].id).toEqual(45);
+        done();
+      });
+    });
+
+    it('should filter out the done section', function (done) {
+      appTester(App.triggers.section.operation.perform, bundle).then(function (results) {
+        expect(results.find((item) => {
+          return item.id === 95;
+        })).toEqual(undefined);
         done();
       });
     });

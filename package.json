@@ -6,7 +6,8 @@
   "author": "Flow Technologies Ltd",
   "contributors": [
     "Josiah Wiebe <hi@jwie.be>",
-    "Rose Robertson <rose@getflow.com>"
+    "Rose Robertson <rose@getflow.com>",
+    "Ali Bosworth <ali@getflow.com>"
   ],
   "license": "MIT",
   "main": "index.js",

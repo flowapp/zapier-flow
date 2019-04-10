@@ -35,6 +35,15 @@ module.exports = {
     },
     operation: {
       perform: listWorkspaces,
+      sample: {
+        id: 1,
+        name: 'Test team A',
+        default: false,
+        locked: true,
+        manually_clear_completed_tasks: false,
+        members_cound: 0,
+        organization_id: 1,
+      },
     },
   },
 

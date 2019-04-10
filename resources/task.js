@@ -236,7 +236,7 @@ module.exports = {
           helpText:
             'Choose a project for your task to be created in. Projects are grouped under Teams, so if you can’t find the project you want, ensure the correct team is selected.',
           altersDynamicFields: true,
-          required: true,
+          required: false,
         },
         {
           key: 'section',

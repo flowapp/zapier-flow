@@ -139,12 +139,12 @@ const listRecentlyUpdatedTasks = (z, bundle) => {
     ...(bundle.inputData.workspace && { workspace_id: bundle.inputData.workspace }),
   };
 
-  // We only want to pass updated_after if it is running for real,
+  // We only want to pass created_after if it is running for real,
   // otherwise potentially sample data will not be populated if a user hasn't recently updated any tasks.
   if (!bundle.meta || !bundle.meta.isLoadingSample) {
-    let updatedAfter = new Date();
-    updatedAfter.setHours(updatedAfter.getHours() - 1);
-    params.updated_after = updatedAfter.toISOString();
+    let createdAfter = new Date();
+    createdAfter.setHours(createdAfter.getHours() - 1);
+    params.created_after = createdAfter.toISOString();
   }
 
   return z

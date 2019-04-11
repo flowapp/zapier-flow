@@ -144,7 +144,7 @@ const listRecentlyUpdatedTasks = (z, bundle) => {
   if (!bundle.meta || !bundle.meta.isLoadingSample) {
     let updatedAfter = new Date();
     updatedAfter.setHours(updatedAfter.getHours() - 1);
-    params.updatedAfter = updatedAfter;
+    params.updated_after = updatedAfter.toISOString();
   }
 
   return z

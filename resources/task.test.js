@@ -23,7 +23,21 @@ describe('Task', function () {
     // Mock request for getting a list of tasks
     nock(FLOW_API_URL)
       .get('/tasks')
-      .query(true)
+      .query((queryObject) => {
+        if (!queryObject.updated_after) {
+          return false;
+        }
+
+        if (!queryObject.organization_id) {
+          return false;
+        }
+
+        if (!queryObject.order) {
+          return false;
+        }
+
+        return true;
+      })
       .reply(200, {
         tasks: [{
           id: 37,

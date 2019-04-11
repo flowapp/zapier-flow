@@ -1,6 +1,6 @@
 const { FLOW_API_URL } = require('../utils/constants');
 
-const listProjects = (z, bundle) => {
+const listLists = (z, bundle) => {
   return z
     .request({
       url: `${FLOW_API_URL}/lists`,
@@ -14,7 +14,7 @@ const listProjects = (z, bundle) => {
     .then((json) => json.lists);
 };
 
-const getProject = (z, bundle) => {
+const getList = (z, bundle) => {
   return z
     .request({
       url: `${FLOW_API_URL}/lists/${bundle.inputData.id}`,
@@ -28,7 +28,7 @@ const getProject = (z, bundle) => {
 };
 
 module.exports = {
-  key: 'project',
+  key: 'list',
   noun: 'Project',
 
   list: {
@@ -46,7 +46,7 @@ module.exports = {
           altersDynamicFields: true,
         },
       ],
-      perform: listProjects,
+      perform: listLists,
       sample: {
         id: 1,
         name: 'Test project A',
@@ -77,7 +77,7 @@ module.exports = {
     },
     operation: {
       inputFields: [{ key: 'id', required: true }],
-      perform: getProject,
+      perform: getList,
     },
   },
 };

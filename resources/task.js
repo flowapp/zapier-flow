@@ -245,7 +245,7 @@ module.exports = {
           key: 'list',
           type: 'integer',
           label: 'Project',
-          dynamic: 'project.id.name',
+          dynamic: 'list.id.name',
           helpText:
             'Choose a project for your task to be created in. Projects are grouped under Teams, so if you can’t find the project you want, ensure the correct team is selected.',
           altersDynamicFields: true,

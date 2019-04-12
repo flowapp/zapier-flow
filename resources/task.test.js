@@ -24,7 +24,7 @@ describe('Task', function () {
     nock(FLOW_API_URL)
       .get('/tasks')
       .query((queryObject) => {
-        if (!queryObject.updated_after) {
+        if (!queryObject.created_after) {
           return false;
         }
 

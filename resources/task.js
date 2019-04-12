@@ -132,19 +132,19 @@ const createTask = (z, bundle) => {
     .then((json) => json.task);
 };
 
-const listRecentlyUpdatedTasks = (z, bundle) => {
+const listRecentlyCreatedTasks = (z, bundle) => {
   let params = {
     order: 'created_at',
     organization_id: bundle.authData.orgId,
     ...(bundle.inputData.workspace && { workspace_id: bundle.inputData.workspace }),
   };
 
-  // We only want to pass updated_after if it is running for real,
-  // otherwise potentially sample data will not be populated if a user hasn't recently updated any tasks.
+  // We only want to pass created_after if it is running for real,
+  // otherwise potentially sample data will not be populated if a user hasn't recently created any tasks.
   if (!bundle.meta || !bundle.meta.isLoadingSample) {
-    let updatedAfter = new Date();
-    updatedAfter.setHours(updatedAfter.getHours() - 1);
-    params.updated_after = updatedAfter.toISOString();
+    let createdAfter = new Date();
+    createdAfter.setHours(createdAfter.getHours() - 1);
+    params.created_after = createdAfter.toISOString();
   }
 
   return z
@@ -191,7 +191,7 @@ module.exports = {
         },
       ],
       outputFields: TaskOutputFields,
-      perform: listRecentlyUpdatedTasks,
+      perform: listRecentlyCreatedTasks,
       sample: {
         id: 1,
         name: 'Test task A',

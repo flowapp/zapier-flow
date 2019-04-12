@@ -8,6 +8,7 @@ const getWorkspaces = (z, bundle) => {
       url: `${FLOW_API_URL}/workspaces`,
       params: {
         organization_id: bundle.authData.orgId,
+        view: 'member',
       },
     })
     .then((response) => z.JSON.parse(response.content))

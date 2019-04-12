@@ -25,6 +25,7 @@ describe('Workspace', function () {
       .get('/workspaces')
       .query({
         organization_id: 1,
+        view: 'member',
       })
       .reply(200, {
         workspaces: [{

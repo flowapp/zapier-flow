@@ -132,7 +132,11 @@ const createTask = (z, bundle) => {
     .then((json) => json.task);
 };
 
-const listRecentlyCreatedTasks = (z, bundle) => {
+/*
+ * Get all tasks that have been created in the last hour in an organization.
+ * workspace can also optionally be specified for a more granular response.
+*/
+const getRecentlyCreatedTasks = (z, bundle) => {
   let params = {
     order: 'created_at',
     organization_id: bundle.authData.orgId,
@@ -191,7 +195,7 @@ module.exports = {
         },
       ],
       outputFields: TaskOutputFields,
-      perform: listRecentlyCreatedTasks,
+      perform: getRecentlyCreatedTasks,
       sample: {
         id: 1,
         name: 'Test task A',

@@ -1,6 +1,10 @@
 const { FLOW_API_URL } = require('../utils/constants');
 
-const listLists = (z, bundle) => {
+/*
+ * Fetch all lists in a workspace that the user has access to,
+ * providing they are not soft-deleted or archived
+*/
+const getListsInWorkspace = (z, bundle) => {
   return z
     .request({
       url: `${FLOW_API_URL}/lists`,
@@ -46,7 +50,7 @@ module.exports = {
           altersDynamicFields: true,
         },
       ],
-      perform: listLists,
+      perform: getListsInWorkspace,
       sample: {
         id: 1,
         name: 'Test project A',

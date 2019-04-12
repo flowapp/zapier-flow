@@ -1,5 +1,8 @@
 const { FLOW_API_URL } = require('../utils/constants');
 
+/*
+ * Get a list of all accounts in a  workspace via the memberships endpoint
+*/
 const getAccounts = (z, bundle) => {
   return z
     .request({

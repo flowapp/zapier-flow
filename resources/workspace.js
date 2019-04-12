@@ -1,6 +1,8 @@
 const { FLOW_API_URL } = require('../utils/constants');
-
-const listWorkspaces = (z, bundle) => {
+/*
+ * Get all workspaces that the current user is a member of
+*/
+const getWorkspaces = (z, bundle) => {
   return z
     .request({
       url: `${FLOW_API_URL}/workspaces`,
@@ -34,7 +36,7 @@ module.exports = {
       description: 'Triggers when a new team is added.',
     },
     operation: {
-      perform: listWorkspaces,
+      perform: getWorkspaces,
       sample: {
         id: 1,
         name: 'Test team A',

@@ -4,10 +4,10 @@ const appTester = zapier.createAppTester(App);
 const nock = require('nock');
 const { FLOW_API_URL } = require('../utils/constants');
 
-describe('Project', function () {
+describe('List', function () {
   let bundle;
   beforeEach(function () {
-    // Mock request for getting a single project
+    // Mock request for getting a single list
     nock(FLOW_API_URL)
       .get('/lists/3')
       .query({
@@ -21,7 +21,7 @@ describe('Project', function () {
         },
       });
 
-    // Mock request for getting a list of projects
+    // Mock request for getting a list of lists
     nock(FLOW_API_URL)
       .get('/lists')
       .query({
@@ -60,10 +60,10 @@ describe('Project', function () {
   });
 
   describe('Get', function () {
-    it('should get a single project', function (done) {
+    it('should get a single list', function (done) {
       bundle.inputData.id = 3;
 
-      appTester(App.resources.project.get.operation.perform, bundle).then(function (results) {
+      appTester(App.resources.list.get.operation.perform, bundle).then(function (results) {
         expect(results.id).toEqual(3);
         expect(results.name).toEqual('I am a list');
         done();
@@ -72,8 +72,8 @@ describe('Project', function () {
   });
 
   describe('List', function () {
-    it('should load a list of projects', function (done) {
-      appTester(App.resources.project.list.operation.perform, bundle).then(function (results) {
+    it('should load a list of lists', function (done) {
+      appTester(App.resources.list.list.operation.perform, bundle).then(function (results) {
         expect(results.length).toEqual(4);
         expect(results[0].id).toEqual(1);
         expect(results[1].id).toEqual(2);

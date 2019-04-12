@@ -1,5 +1,5 @@
 const { FLOW_API_URL } = require('../utils/constants');
-const { TaskOutputFields, parseTask, getTask, generateTaskSample } = require('../utils/sharedTaskResources');
+const { TaskOutputFields, parseTask, generateTaskSample } = require('../utils/sharedTaskResources');
 
 /*
  * Get all tasks that have been completed in the last hour in an organization.
@@ -33,39 +33,23 @@ const getRecentlyCompletedTasks = (z, bundle) => {
 module.exports = {
   key: 'completedTask',
   noun: 'Completed Task',
-
-  get: {
-    display: {
-      label: 'Get a Task by ID',
-      description: 'Grab a single Task by ID.',
-    },
-
-    operation: {
-      inputFields: [{ key: 'id', required: true }],
-      outputFields: TaskOutputFields,
-      perform: getTask,
-    },
+  display: {
+    label: 'Completed Task',
+    description: 'Triggers when a task is completed.',
   },
 
-  list: {
-    display: {
-      label: 'Completed Task',
-      description: 'Triggers when a task is completed.',
-    },
-
-    operation: {
-      inputFields: [
-        {
-          key: 'workspace',
-          type: 'string',
-          helpText: 'Team for Task',
-          dynamic: 'workspace.id.name',
-          altersDynamicFields: true,
-        },
-      ],
-      outputFields: TaskOutputFields,
-      perform: getRecentlyCompletedTasks,
-      sample: generateTaskSample(true),
-    },
+  operation: {
+    inputFields: [
+      {
+        key: 'workspace',
+        type: 'string',
+        helpText: 'Team for Task',
+        dynamic: 'workspace.id.name',
+        altersDynamicFields: true,
+      },
+    ],
+    outputFields: TaskOutputFields,
+    perform: getRecentlyCompletedTasks,
+    sample: generateTaskSample(true),
   },
 };

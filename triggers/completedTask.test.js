@@ -53,7 +53,7 @@ describe('CompletedTask', function () {
 
   describe('List', function () {
     it('should load a list of completed tasks', function (done) {
-      appTester(App.resources.completedTask.list.operation.perform, bundle).then(function (results) {
+      appTester(App.triggers.completedTask.operation.perform, bundle).then(function (results) {
         expect(results.length).toEqual(3);
         expect(results[0].id).toEqual(37);
         expect(results[0].completed).toBeTruthy();

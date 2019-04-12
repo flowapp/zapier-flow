@@ -9,11 +9,11 @@ const includeApiKeyHeader = (request, z, bundle) => {
 };
 
 const Task = require('./resources/task');
-const CompletedTask = require('./resources/completedTask');
 const List = require('./resources/list');
 const Workspace = require('./resources/workspace');
 const Account = require('./triggers/account');
 const Section = require('./triggers/section');
+const CompletedTask = require('./triggers/completedTask');
 
 // Now we can roll up all our behavios in an App.
 const App = {
@@ -31,7 +31,6 @@ const App = {
   // If you want your resource to show up, you better include it here!
   resources: {
     [Task.key]: Task,
-    [CompletedTask.key]: CompletedTask,
     [List.key]: List,
     [Workspace.key]: Workspace,
   },
@@ -40,6 +39,7 @@ const App = {
   triggers: {
     [Section.key]: Section,
     [Account.key]: Account,
+    [CompletedTask.key]: CompletedTask,
   },
 
   // If you want your searches to show up, you better include it here!

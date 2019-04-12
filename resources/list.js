@@ -1,5 +1,27 @@
 const { FLOW_API_URL } = require('../utils/constants');
 
+const ListOutputFields = [
+  {
+    key: 'workspace_id',
+    label: 'Team ID',
+  },
+
+  {
+    key: 'default_view',
+    label: 'Default View (either “row” or “column”)',
+  },
+
+  {
+    key: 'tasks_count',
+    label: 'Total Task Count (including completed)',
+  },
+
+  {
+    key: 'completed_tasks_count',
+    label: 'Completed Task Count',
+  },
+];
+
 /*
   * Method to convert API list response to trim down unneeded values
   * When Zapier populates the action part of the form it grabs all items from the list response
@@ -81,6 +103,7 @@ module.exports = {
           altersDynamicFields: true,
         },
       ],
+      outputFields: ListOutputFields,
       perform: getListsInWorkspace,
       sample: {
         id: 1,
@@ -112,6 +135,7 @@ module.exports = {
     },
     operation: {
       inputFields: [{ key: 'id', required: true }],
+      outputFields: ListOutputFields,
       perform: getList,
     },
   },

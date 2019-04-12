@@ -59,7 +59,8 @@ module.exports = {
   list: {
     display: {
       label: 'New Team',
-      description: 'Triggers when a new team is added.',
+      description: 'This hidden trigger is used to populate workspace dropdowns.',
+      hidden: true,
     },
     operation: {
       perform: getWorkspaces,

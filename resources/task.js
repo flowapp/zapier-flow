@@ -2,15 +2,6 @@ const { FLOW_API_URL } = require('../utils/constants');
 
 const TaskOutputFields = [
   {
-    key: 'id',
-    label: 'Task ID',
-  },
-  {
-    key: 'name',
-    label: 'Task Name',
-  },
-
-  {
     key: 'workspace_id',
     label: 'Team ID',
   },
@@ -21,43 +12,28 @@ const TaskOutputFields = [
   },
 
   {
-    key: 'section_id',
-    label: 'Section ID',
-  },
-
-  {
     key: 'account_id',
-    label: 'Task Creater ID',
+    label: 'Creater ID',
   },
 
   {
     key: 'owner_id',
-    label: 'Task Assignee ID',
+    label: 'Assignee ID',
   },
 
   {
     key: 'due_on',
-    label: 'Task Due Date',
+    label: 'Due Date',
   },
 
   {
     key: 'starts_on',
-    label: 'Task Start Date',
-  },
-
-  {
-    key: 'created_at',
-    label: 'Task Created At',
+    label: 'Start Date',
   },
 
   {
     key: 'updated_at',
-    label: 'Task Last Updated At',
-  },
-
-  {
-    key: 'tags',
-    label: 'Task Tags',
+    label: 'Last Updated At',
   },
 ];
 

@@ -9,6 +9,7 @@ const includeApiKeyHeader = (request, z, bundle) => {
 };
 
 const Task = require('./resources/task');
+const CompletedTask = require('./resources/completedTask');
 const List = require('./resources/list');
 const Workspace = require('./resources/workspace');
 const Account = require('./triggers/account');
@@ -30,6 +31,7 @@ const App = {
   // If you want your resource to show up, you better include it here!
   resources: {
     [Task.key]: Task,
+    [CompletedTask.key]: CompletedTask,
     [List.key]: List,
     [Workspace.key]: Workspace,
   },

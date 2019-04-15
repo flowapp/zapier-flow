@@ -2,15 +2,6 @@ const { FLOW_API_URL } = require('../utils/constants');
 
 const TaskOutputFields = [
   {
-    key: 'id',
-    label: 'Task ID',
-  },
-  {
-    key: 'name',
-    label: 'Task Name',
-  },
-
-  {
     key: 'workspace_id',
     label: 'Team ID',
   },
@@ -21,43 +12,28 @@ const TaskOutputFields = [
   },
 
   {
-    key: 'section_id',
-    label: 'Section ID',
-  },
-
-  {
     key: 'account_id',
-    label: 'Task Creater ID',
+    label: 'Creater ID',
   },
 
   {
     key: 'owner_id',
-    label: 'Task Assignee ID',
+    label: 'Assignee ID',
   },
 
   {
     key: 'due_on',
-    label: 'Task Due Date',
+    label: 'Due Date',
   },
 
   {
     key: 'starts_on',
-    label: 'Task Start Date',
-  },
-
-  {
-    key: 'created_at',
-    label: 'Task Created At',
+    label: 'Start Date',
   },
 
   {
     key: 'updated_at',
-    label: 'Task Last Updated At',
-  },
-
-  {
-    key: 'tags',
-    label: 'Task Tags',
+    label: 'Last Updated At',
   },
 ];
 
@@ -132,7 +108,11 @@ const createTask = (z, bundle) => {
     .then((json) => json.task);
 };
 
-const listRecentlyCreatedTasks = (z, bundle) => {
+/*
+ * Get all tasks that have been created in the last hour in an organization.
+ * workspace can also optionally be specified for a more granular response.
+*/
+const getRecentlyCreatedTasks = (z, bundle) => {
   let params = {
     order: 'created_at',
     organization_id: bundle.authData.orgId,
@@ -191,7 +171,7 @@ module.exports = {
         },
       ],
       outputFields: TaskOutputFields,
-      perform: listRecentlyCreatedTasks,
+      perform: getRecentlyCreatedTasks,
       sample: {
         id: 1,
         name: 'Test task A',

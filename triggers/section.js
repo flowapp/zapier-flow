@@ -13,6 +13,11 @@ function filterOutCompletedTaskSection(json) {
   });
 }
 
+/*
+ * Get all sections within a list, filtering out the 'done' section as
+ * we are using this for auto-complete on task creation and we do not want to create tasks
+ * in the done section.
+*/
 const getSections = (z, bundle) => {
   return z
     .request({

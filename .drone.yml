@@ -19,6 +19,17 @@ steps:
   image: node
   commands:
   - $(npm bin)/zapier validate
+- name: publish
+  image: node
+  environment:
+    ZAPIER_DEPLOY_KEY:
+      from_secret: zapier_deploy_key
+  commands:
+  - $(npm bin)/zapier push
+  #- $(npm bin)/zapier promote $DRONE_TAG | cut -d "v" -f2
+  when:
+    ref:
+      - refs/tags/v*
 
 trigger:
   event:

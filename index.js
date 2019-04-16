@@ -14,6 +14,7 @@ const Workspace = require('./resources/workspace');
 const Account = require('./triggers/account');
 const Section = require('./triggers/section');
 const CompletedTask = require('./triggers/completedTask');
+const hydrators = require('./utils/hydrators');
 
 // Now we can roll up all our behavios in an App.
 const App = {
@@ -47,6 +48,8 @@ const App = {
 
   // If you want your creates to show up, you better include it here!
   creates: {},
+
+  hydrators,
 };
 
 // Finally, export the app.

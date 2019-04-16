@@ -1,5 +1,5 @@
 const { FLOW_API_URL } = require('../utils/constants');
-const { TaskOutputFields, parseTask, generateTaskSample } = require('../utils/sharedTaskResources');
+const { TaskOutputFields, parseTask, generateTaskSample, setupTaskDehydrators } = require('../utils/sharedTaskResources');
 
 /*
  * Get all tasks that have been completed in the last hour in an organization.
@@ -27,6 +27,10 @@ const getRecentlyCompletedTasks = (z, bundle) => {
       params,
     })
     .then((response) => z.JSON.parse(response.content))
+    .then((json) => {
+      json.tasks = json.tasks.map((task) => setupTaskDehydrators(z, task));
+      return json;
+    })
     .then((json) => json.tasks.map(parseTask));
 };
 

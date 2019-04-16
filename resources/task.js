@@ -1,5 +1,5 @@
 const { FLOW_API_URL } = require('../utils/constants');
-const { TaskOutputFields, parseTask, getTask, generateTaskSample } = require('../utils/sharedTaskResources');
+const { TaskOutputFields, parseTask, getTask, generateTaskSample, setupTaskDehydrators } = require('../utils/sharedTaskResources');
 
 const createTask = (z, bundle) => {
   const request = {
@@ -56,6 +56,10 @@ const getRecentlyCreatedTasks = (z, bundle) => {
       params,
     })
     .then((response) => z.JSON.parse(response.content))
+    .then((json) => {
+      json.tasks = json.tasks.map((task) => setupTaskDehydrators(z, task));
+      return json;
+    })
     .then((json) => json.tasks.map(parseTask));
 };
 

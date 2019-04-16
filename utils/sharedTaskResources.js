@@ -35,6 +35,16 @@ const TaskOutputFields = [
     key: 'updated_at',
     label: 'Last Updated At',
   },
+
+  {
+    key: 'note_content',
+    label: 'Note Content as Markdown',
+  },
+
+  {
+    key: 'note_content_html',
+    label: 'Note Content as HTML',
+  },
 ];
 
 /*
@@ -48,7 +58,7 @@ const TaskOutputFields = [
   * @return {Object} Task
 */
 function parseTask(task) {
-  return {
+  let returnValue = {
     id: task.id,
     name: task.name,
     workspace_id: task.workspace_id,
@@ -64,6 +74,16 @@ function parseTask(task) {
     completed: task.completed,
     completed_at: task.completed_at,
   };
+
+  if (task.note_mime_type !== 'text/html') {
+    returnValue.note_content = task.note_content;
+    returnValue.note_content_html = task.note_content_html;
+  } else {
+    // Legacy tasks using our older visual editor will not have a markdown version
+    returnValue.note_content_html = task.note_content_html;
+  }
+
+  return returnValue;
 }
 
 const getTask = (z, bundle) => {

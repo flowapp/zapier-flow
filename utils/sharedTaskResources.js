@@ -1,4 +1,5 @@
 const { FLOW_API_URL } = require('./constants');
+const { getListName, getWorkspaceName, getSectionName, getAccountName, getAccountNames } = require('./hydrators');
 
 const TaskOutputFields = [
   {
@@ -7,18 +8,38 @@ const TaskOutputFields = [
   },
 
   {
+    key: 'workspace_name',
+    label: 'Team Name',
+  },
+
+  {
     key: 'list_id',
     label: 'Project ID',
   },
 
   {
+    key: 'list_name',
+    label: 'Project Name',
+  },
+
+  {
     key: 'account_id',
-    label: 'Creater ID',
+    label: 'Creator ID',
+  },
+
+  {
+    key: 'account_name',
+    label: 'Creator Name',
   },
 
   {
     key: 'owner_id',
     label: 'Assignee ID',
+  },
+
+  {
+    key: 'owner_name',
+    label: 'Assignee Name',
   },
 
   {
@@ -62,10 +83,17 @@ function parseTask(task) {
     id: task.id,
     name: task.name,
     workspace_id: task.workspace_id,
+    workspace_name: task.workspace_name, // populated via dehydration call
     list_id: task.list_id,
+    list_name: task.list_name, // populated via dehydration call
     section_id: task.section_id,
+    section_name: task.section_name, // populated via dehydration call
     account_id: task.account_id,
+    account_name: task.account_name, // populated via dehydration call
     owner_id: task.owner_id,
+    owner_name: task.owner_name, // populated via dehydration call
+    subscriber_names: task.subscriber_names, // populated via dehydration call
+    subscriber_ids: task.subscriber_ids,
     due_on: task.due_on,
     starts_on: task.starts_on,
     created_at: task.created_at,
@@ -86,6 +114,74 @@ function parseTask(task) {
   return returnValue;
 }
 
+/*
+  *
+  * Method to populate additional values on the task model that
+  * aren’t returned via the original request using z.dehydrate
+  *
+  * @param {Object} Zapier 'z'
+  * @param {Object} Task
+  * @return {Object} Task
+*/
+function setupTaskDehydrators(z, task) {
+  if (task.list_id) {
+    task.list_name = z.dehydrate(getListName, {
+      id: task.list_id,
+      workspace_id: task.workspace_id,
+    });
+
+    if (task.section_id) {
+      task.section_name = z.dehydrate(getSectionName, {
+        id: task.section_id,
+        workspace_id: task.workspace_id,
+        list_id: task.list_id,
+      });
+    } else {
+      task.section_name = '';
+    }
+  } else {
+    task.list_name = '';
+    task.section_name = '';
+  }
+
+  if (task.workspace_id) {
+    task.workspace_name = z.dehydrate(getWorkspaceName, {
+      id: task.workspace_id,
+    });
+  } else {
+    task.workspace_name = '';
+  }
+
+  if (task.owner_id) {
+    task.owner_name = z.dehydrate(getAccountName, {
+      id: task.owner_id,
+      workspace_id: task.workspace_id,
+    });
+  } else {
+    task.owner_name = '';
+  }
+
+  if (task.account_id) {
+    task.account_name = z.dehydrate(getAccountName, {
+      id: task.account_id,
+      workspace_id: task.workspace_id,
+    });
+  } else {
+    task.account_name = '';
+  }
+
+  if (task.subscriber_ids && task.subscriber_ids.length) {
+    task.subscriber_names = z.dehydrate(getAccountNames, {
+      ids: task.subscriber_ids,
+      workspace_id: task.workspace_id,
+    });
+  } else {
+    task.subscriber_names = [];
+  }
+
+  return task;
+}
+
 const getTask = (z, bundle) => {
   return z
     .request({
@@ -95,6 +191,10 @@ const getTask = (z, bundle) => {
       },
     })
     .then((response) => z.JSON.parse(response.content))
+    .then((results) => {
+      results.task = setupTaskDehydrators(z, results.task);
+      return results;
+    })
     .then((json) => {
       return parseTask(json.task);
     });
@@ -131,4 +231,5 @@ module.exports = {
   TaskOutputFields,
   getTask,
   generateTaskSample,
+  setupTaskDehydrators,
 };

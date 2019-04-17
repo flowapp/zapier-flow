@@ -1,9 +1,15 @@
 const { FLOW_API_URL } = require('../utils/constants');
+const { getWorkspaceName, getSectionName, getAccountNames } = require('../utils/hydrators');
 
 const ListOutputFields = [
   {
     key: 'workspace_id',
     label: 'Team ID',
+  },
+
+  {
+    key: 'workspace_name',
+    label: 'Team Name',
   },
 
   {
@@ -23,6 +29,56 @@ const ListOutputFields = [
 ];
 
 /*
+  *
+  * Method to populate additional values on the list model that
+  * aren’t returned via the original request using z.dehydrate
+  *
+  * @param {Object} Zapier 'z'
+  * @param {Object} List
+  * @return {Object} List
+*/
+function setupListDehydrators(z, list) {
+  if (list.default_section_id) {
+    list.default_section_name = z.dehydrate(getSectionName, {
+      id: list.default_section_id,
+      workspace_id: list.workspace_id,
+      list_id: list.id,
+    });
+  } else {
+    list.default_section_name = '';
+  }
+
+  if (list.completed_section_id) {
+    list.completed_section_name = z.dehydrate(getSectionName, {
+      id: list.completed_section_id,
+      workspace_id: list.workspace_id,
+      list_id: list.id,
+    });
+  } else {
+    list.completed_section_name = '';
+  }
+
+  if (list.workspace_id) {
+    list.workspace_name = z.dehydrate(getWorkspaceName, {
+      id: list.workspace_id,
+    });
+  } else {
+    list.workspace_name = '';
+  }
+
+  if (list.subscriber_ids && list.subscriber_ids.length) {
+    list.subscriber_names = z.dehydrate(getAccountNames, {
+      ids: list.subscriber_ids,
+      workspace_id: list.workspace_id,
+    });
+  } else {
+    list.subscriber_names = [];
+  }
+
+  return list;
+}
+
+/*
   * Method to convert API list response to trim down unneeded values
   * When Zapier populates the action part of the form it grabs all items from the list response
   * without any discrimination. Many of the items are poorly labelled and not likely to be needed for any integration.
@@ -39,8 +95,10 @@ function parseList(list) {
     created_at: list.created_at,
     updated_at: list.updated_at,
     completed_section_id: list.completed_section_id,
+    completed_section_name: list.completed_section_name, // populated via dehydration call
     completed_tasks_count: list.completed_tasks_count,
     default_section_id: list.default_section_id,
+    default_section_name: list.default_section_name, // populated via dehydration call
     default_view: list.default_view,
     ends_on: list.ends_on,
     group_id: list.group_id,
@@ -48,8 +106,10 @@ function parseList(list) {
     invite_only: list.invite_only,
     starts_on: list.starts_on,
     subscriber_ids: list.subscriber_ids,
+    subscriber_names: list.subscriber_names, // populated via dehydration call
     tasks_count: list.tasks_count,
     workspace_id: list.workspace_id,
+    workspace_name: list.workspace_name, // populated via dehydration call
   };
 }
 
@@ -68,6 +128,10 @@ const getListsInWorkspace = (z, bundle) => {
       },
     })
     .then((response) => z.JSON.parse(response.content))
+    .then((json) => {
+      json.lists = json.lists.map((list) => setupListDehydrators(z, list));
+      return json;
+    })
     .then((json) => json.lists.map(parseList));
 };
 
@@ -81,6 +145,10 @@ const getList = (z, bundle) => {
       },
     })
     .then((response) => z.JSON.parse(response.content))
+    .then((json) => {
+      json.list = setupListDehydrators(z, json.list);
+      return json;
+    })
     .then((json) => parseList(json.list));
 };
 

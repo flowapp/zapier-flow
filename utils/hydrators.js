@@ -24,17 +24,11 @@ const getSectionName = function (z, bundle) {
   })
     .then((response) => z.JSON.parse(response.content))
     .then((json) => {
-      let sectionName = '';
-      (json.sections || []).find((section) => {
-        if (section.id === bundle.inputData.id) {
-          sectionName = section.name;
-          return true;
-        }
-
-        return false;
+      let section = (json.sections || []).find((item) => {
+        return item.id === bundle.inputData.id;
       });
 
-      return sectionName;
+      return section ? section.name : '';
     });
 };
 
@@ -49,17 +43,11 @@ const getAccountName = function (z, bundle) {
   })
     .then((response) => z.JSON.parse(response.content))
     .then((json) => {
-      let accountName = '';
-      (json.accounts || []).find((account) => {
-        if (account.id === bundle.inputData.id) {
-          accountName = account.name;
-          return true;
-        }
-
-        return false;
+      let account = (json.accounts || []).find((item) => {
+        return item.id === bundle.inputData.id;
       });
 
-      return accountName;
+      return account ? account.name : '';
     });
 };
 

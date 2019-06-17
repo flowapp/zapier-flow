@@ -1,6 +1,6 @@
 {
   "name": "zapier-flow",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "An app to connect the Flow API to Zapier.",
   "repository": "flowapp/zapier-flow",
   "author": "Flow Technologies Ltd <engineering@getflow.com>",

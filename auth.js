@@ -1,11 +1,9 @@
-const { FLOW_API_URL } = require('./utils/constants');
+const { FLOW_API_URL, HEADERS } = require('./utils/constants');
 
 const testAuth = (z) => {
   const promise = z.request({
     url: `${FLOW_API_URL}/tasks`,
-    headers: {
-      Accept: 'application/vnd.flow.v2+json',
-    },
+    headers: HEADERS,
   });
 
   return promise.then((response) => {

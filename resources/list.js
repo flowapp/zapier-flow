@@ -1,4 +1,4 @@
-const { FLOW_API_URL } = require('../utils/constants');
+const { HEADERS, FLOW_API_URL } = require('../utils/constants');
 const { getWorkspaceName, getSectionName, getAccountNames } = require('../utils/hydrators');
 
 const ListOutputFields = [
@@ -121,6 +121,7 @@ const getListsInWorkspace = (z, bundle) => {
   return z
     .request({
       url: `${FLOW_API_URL}/lists`,
+      headers: HEADERS,
       params: {
         organization_id: bundle.authData.orgId,
         workspace_id: bundle.inputData.workspace,
@@ -139,6 +140,7 @@ const getList = (z, bundle) => {
   return z
     .request({
       url: `${FLOW_API_URL}/lists/${bundle.inputData.id}`,
+      headers: HEADERS,
       params: {
         organization_id: bundle.authData.orgId,
         workspace_id: bundle.inputData.workspace,

@@ -1,4 +1,4 @@
-const { FLOW_API_URL } = require('../utils/constants');
+const { FLOW_API_URL, HEADERS } = require('../utils/constants');
 
 /*
  * Sections are used for the task creation action and you cannot create a task in the designated completed section; the API will return an error.
@@ -27,6 +27,7 @@ const getSections = (z, bundle) => {
         workspace_id: bundle.inputData.workspace,
         include: 'sections',
       },
+      headers: HEADERS,
     })
     .then((response) => z.JSON.parse(response.content))
     .then((json) => filterOutCompletedTaskSection(json));

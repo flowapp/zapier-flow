@@ -1,4 +1,4 @@
-const { FLOW_API_URL } = require('../utils/constants');
+const { HEADERS, FLOW_API_URL } = require('../utils/constants');
 const { TaskOutputFields, parseTask, generateTaskSample, setupTaskDehydrators } = require('../utils/sharedTaskResources');
 
 /*
@@ -25,6 +25,7 @@ const getRecentlyCompletedTasks = (z, bundle) => {
     .request({
       url: `${FLOW_API_URL}/tasks`,
       params,
+      HEADERS,
     })
     .then((response) => z.JSON.parse(response.content))
     .then((json) => {

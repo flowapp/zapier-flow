@@ -1,4 +1,4 @@
-const { FLOW_API_URL } = require('../utils/constants');
+const { FLOW_API_URL, HEADERS } = require('../utils/constants');
 
 /*
   * Method to convert API workspace response to trim down unneeded values
@@ -35,6 +35,7 @@ const getWorkspaces = (z, bundle) => {
         organization_id: bundle.authData.orgId,
         view: 'member',
       },
+      headers: HEADERS,
     })
     .then((response) => z.JSON.parse(response.content))
     .then((json) => json.workspaces.map(parseWorkspace));
@@ -47,6 +48,7 @@ const getWorkspace = (z, bundle) => {
       params: {
         organization_id: bundle.authData.orgId,
       },
+      headers: HEADERS,
     })
     .then((response) => z.JSON.parse(response.content))
     .then((json) => parseWorkspace(json.workspace));
